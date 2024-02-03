@@ -1,0 +1,11 @@
+{
+    "name" : "AniTrack V3",
+    "author" : "Somya Bhatt",
+    "description" : "Track your Anime/Manga progress, extension for AniList",
+    "version" : "1.0",
+    "manifest_version": 3,
+    "permissions": ["storage"],
+    "action": {
+        "default_popup": "index.html"
+    }
+}
