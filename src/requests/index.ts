@@ -57,6 +57,8 @@ export const updateMedia = async(variables : updateAnimeVariable) => {
             })
         })
 
+        console.log("Checking ",variables)
+
         const data = await response.json()
         console.log("Checking ",data)
         return data.data;

@@ -19,11 +19,13 @@ import {
 } from "react-loader-spinner";
 
 // components
-import MyAnimeCard from "@/components/MyAnimeCard";
+import MyMediaCard from "@/components/MyMediaCard";
 
 
 
-const MyAnime = () => {
+const MyAnime = (
+    {MediaType} : {MediaType: 'ANIME' | 'MANGA'}
+) => {
 
     const { userId } = useUserStore();
 
@@ -34,7 +36,7 @@ const MyAnime = () => {
     const fetchUserData = async () => {
         try {
             setLoading(true);
-            const result = await userMediaList(userId,status,'UPDATED_TIME_DESC','ANIME');
+            const result = await userMediaList(userId,status,'UPDATED_TIME_DESC',MediaType);
             setUserAnimeData(result?.Page?.mediaList);
             setLoading(false);
         } catch (error) {
@@ -53,7 +55,9 @@ const MyAnime = () => {
 
     return (
         <section className='max-h-full relative p-6 text-white'>
-            <h1 className='font-bold text-[2rem]'>My Anime</h1>
+            <h1 className='font-bold text-[2rem]'>My {
+                MediaType === 'ANIME' ? 'Anime' : 'Manga'
+            } </h1>
 
             <div className='mt-2'>
                 <Select 
@@ -79,10 +83,10 @@ const MyAnime = () => {
                             width={50}
                         />
                     </div> :
-                    <div className='mt-5 max-h-[450px] flex flex-col gap-2 overflow-y-scroll scrollbar scrollbar-thumb-[#7330e6] scrollbar-w-3'>
+                    <div className='mt-5 max-h-[450px] w-full flex flex-col gap-2 overflow-y-scroll scrollbar scrollbar-thumb-[#7330e6] scrollbar-w-3'>
                         {
                             userAnimeData?.map((anime : userMediaListResponse) => (
-                                <MyAnimeCard
+                                <MyMediaCard
                                     key={anime.id}
                                     MyAnime={anime}
                                 />

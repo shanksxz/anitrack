@@ -36,8 +36,8 @@ type userState = {
 
 
 const useUserStore = create<userState>((set) => ({
-    userId : JSON.parse(localStorage.getItem('userDetail') || '{}').Viewer.id || 0,
-    userName : JSON.parse(localStorage.getItem('userDetail') || '{}').Viewer.name || '',
+    userId : JSON.parse(localStorage.getItem('userDetail') || '{}').Viewer?.id || 0,
+    userName : JSON.parse(localStorage.getItem('userDetail') || '{}').Viewer?.name || '',
     setUserId : (id) => set(() => ({userId : id})),
     setUserName : (name) => set(() => ({userName : name}))
 }))

@@ -21,7 +21,7 @@ const Login = () => {
     }
 
   return (
-        <form className='w-[350px] p-4 bg-darkGrey text-white rounded-sm flex flex-col gap-2' 
+        <form className='w-[350px] p-4 bg-[#282828] text-white rounded-sm flex flex-col gap-2' 
             onSubmit={handleSubmit}>
             <p className=" mb-1">
                 Click <span className='rounded-sm underline'>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { searchAnimeResponse, MediaType } from "../types";
-import AnimeCard from "../components/AnimeCard";
+import MediaCard from "../components/MediaCard";
 
 
 import { searchAnime } from "../requests/index";
@@ -18,7 +18,7 @@ import {
   Triangle
 } from 'react-loader-spinner'
 import { useStore } from "@/app/store";
-import UpdatePage from "./UpdatePage";
+import Update from "./Update";
 
 
 const SearchPage = () => {
@@ -93,7 +93,7 @@ const SearchPage = () => {
             (
               <div className='m-6 mt-0 flex flex-col max-h-[500px] overflow-y-scroll scrollbar scrollbar-thumb-[#7330e6] scrollbar-w-3 gap-2'>
                 {animeDataResponse.map((animeData) => (
-                  <AnimeCard
+                  <MediaCard
                     key={animeData.id}
                     anime={animeData}
                   />
@@ -104,7 +104,7 @@ const SearchPage = () => {
   
       </div>
       ) : (
-        <UpdatePage />
+        <Update />
       )
   );
 };

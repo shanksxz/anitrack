@@ -13,7 +13,7 @@ import {
 import {useStore} from '../app/store'
 // import { motion } from 'framer-motion'
 
-const AnimeCard = ({ anime }: { anime: searchAnimeResponse }) => {
+const MediaCard = ({ anime }: { anime: searchAnimeResponse }) => {
 
 
 
@@ -111,4 +111,4 @@ const AnimeCard = ({ anime }: { anime: searchAnimeResponse }) => {
     )
 }
 
-export default AnimeCard
+export default MediaCard

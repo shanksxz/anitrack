@@ -11,7 +11,7 @@ import { IoIosArrowBack } from "react-icons/io";
 
 
 
-const UpdatePage = () => {
+const Update = () => {
 
 
     const {
@@ -258,4 +258,4 @@ const UpdatePage = () => {
   )
 }
 
-export default UpdatePage
+export default Update

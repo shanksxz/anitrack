@@ -1,6 +1,4 @@
-
-import MyAnime from "./MyAnime"
-import MyManga from "./MyManga"
+import MyMedia from "./MyMedia"
 import SearchPage from "./Search"
 import Settings from "./Settings"
 import SideBar from "./SideBar"
@@ -15,12 +13,13 @@ const Home = () => {
     currentTab
   } = currentUI();
 
+
   return (
     <main className='flex w-[600px] h-[600px]'>
         <section className='bg-[#1a1a1a] w-[calc(88%)]'>
             {
               currentTab === 'SEARCH'?
-              <SearchPage/> : currentTab === 'MYANIME'? <MyAnime/> : currentTab === 'SETTINGS'? <Settings/> : <MyManga/>
+              <SearchPage/> : currentTab === 'MYANIME'? <MyMedia MediaType="ANIME" /> : currentTab !== 'MYMANGA'? <Settings/> : <MyMedia MediaType="MANGA"/>
             }
         </section>
         <section className='w-[calc(12%)]'>
