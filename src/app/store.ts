@@ -1,8 +1,6 @@
 import { create } from 'zustand'
 import { storeState } from '../types'
-import {
-    MediaType
-} from '../types/index.ts'
+import { MediaType } from '../types/index.ts'
 
 
 const useStore = create<storeState>((set) => ({
@@ -34,7 +32,6 @@ type userState = {
     setUserName : (name : string) => void
 }
 
-
 const useUserStore = create<userState>((set) => ({
     userId : JSON.parse(localStorage.getItem('userDetail') || '{}').Viewer?.id || 0,
     userName : JSON.parse(localStorage.getItem('userDetail') || '{}').Viewer?.name || '',
@@ -42,5 +39,4 @@ const useUserStore = create<userState>((set) => ({
     setUserName : (name) => set(() => ({userName : name}))
 }))
 
-// export default useStore
 export { useStore, currentUI, useUserStore }

@@ -38,7 +38,7 @@ export type storeState = {
     setMediaType : (type : MediaType) => void
 }
 
-export type searchAnimeResponse = {
+export type searchMediaResponse = {
     id : number,
     title : {
         romaji : string,
@@ -51,6 +51,7 @@ export type searchAnimeResponse = {
         airingAt : number,
         episode : number
     },
+    type : MediaType,
     averageScore : number,
     description : string,
     episodes : number,
@@ -168,9 +169,8 @@ export type ViewerQueryResponse = {
 };
   
 
-
 /* User Media List */
-export type userMediaListResponse =  {
+export type  userMediaListResponse =  {
     status : string,
     media : {
         title : {
@@ -190,6 +190,8 @@ export type userMediaListResponse =  {
         }
         type : 'ANIME' | 'MANGA',
         status : string,
+        episodes : number,
+        chapters : number,
     },
     progress : number,
     mediaId : number,

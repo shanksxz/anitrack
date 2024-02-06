@@ -17,7 +17,14 @@ module.exports = {
       },
     },
     extend: {
+      backgroundColor: {
+        purple : "var(--color-primary-accent)",
+        primary_gray : "var(--color-primary)",
+        secondary_gray : "var(--color-secondary)",
+      },
       colors: {
+        purple : "var(--color-primary-accent)",
+        p_text : "hex(var(--color-text))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

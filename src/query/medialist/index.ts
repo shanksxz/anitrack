@@ -25,6 +25,8 @@ export const userMediaListQuery = `
           }
 
           status
+          episodes
+          chapters
 
         }
         progress

@@ -8,6 +8,7 @@ const searchQuery = `
           english
           native
         }
+        type
         nextAiringEpisode {
           id
           timeUntilAiring

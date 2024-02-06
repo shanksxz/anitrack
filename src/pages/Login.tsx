@@ -12,7 +12,7 @@ const Login = () => {
 
         if(inputAccessToken === '') {
             setErrors('Please enter a token')
-            return  
+            return  ;
         } 
 
         localStorage.setItem('accessToken', inputAccessToken);

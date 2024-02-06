@@ -16,7 +16,7 @@ import {
 } from '../types/index.ts'
 
 
-export const searchAnime = async({search : input, mediaType} : searchAnimeVariable) => {
+export const searchMedia = async({search : input, mediaType} : searchAnimeVariable) => {
     try {
         const respose = await fetch('https://graphql.anilist.co', {
             method : 'POST',

@@ -30,6 +30,7 @@ const UpdateModalDetails = ({ isOpen, setIsOpen, mediaId }: UpdateModalDetailsPr
             //overlay bg-black
             className='absolute top-0 left-0 w-full h-full bg-black/30'
         >
+        <Toaster position="top-center" containerStyle={{width : 'calc(88/100 * 600px)', height : '600px'}}/>
         <section
             className={`${isOpen ? 'block' : 'hidden'}
             border-2 border-white/25
@@ -38,7 +39,6 @@ const UpdateModalDetails = ({ isOpen, setIsOpen, mediaId }: UpdateModalDetailsPr
             rounded-sm 
             text-white`
             }>
-            <Toaster />
             {
                 status === 'loading' ?
                     <div className='w-full h-full flex justify-center items-center'>

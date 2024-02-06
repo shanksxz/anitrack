@@ -27,7 +27,7 @@ const MyMediaCard = (
             progress: progress
         }
     });
-    
+        
     const handleIncrement = async() => {
         setProgress((prev) => prev + 1);
         try {
@@ -39,16 +39,14 @@ const MyMediaCard = (
     }
 
     return (
-        <div className='bg-[#262626] p-1 flex max-h-[100px] gap-2 justify-between items-end rounded-sm'>
+        <div className='bg-secondary_gray p-1 flex max-h-[100px] gap-2 justify-between items-end rounded-sm'>
             <div className='flex gap-2'>
-
                 <img
-                    className='w-[50px] h-[75px] rounded-sm object-cover'
+                    className='w-[50px] rounded-sm object-cover'
                     src={MyAnime?.media?.coverImage?.medium}
                     alt={MyAnime?.media?.title?.english}
                 />
                 <div className=''>
-                    <div className='flex gap-2'>
                         <p>
                             {
                                 MyAnime?.media?.title?.userPreferred?.trim().length > 40 ? 
@@ -56,21 +54,18 @@ const MyMediaCard = (
                                 MyAnime?.media?.title?.userPreferred?.trim()
                             }
                         </p>
-
-                        {
-                            (MyAnime?.status === 'CURRENT' && MyAnime?.media?.status === 'RELEASING' && MyAnime?.media?.type === 'ANIME') ?
-                                <p className='font-bold'>
-                                    {MyAnime?.media?.nextAiringEpisode?.episode} airing in {timeStampsToRemainingTime(MyAnime?.media?.nextAiringEpisode?.timeUntilAiring)}
-                                </p> : ''
-                        }
-
-                    </div>
                     <p>
                         {
                             MyAnime?.media?.type === 'ANIME' && MyAnime?.status !== 'PLANNING' ?
-                                `Episodes: ${progress}` :
-                                MyAnime?.media?.type === 'MANGA' && MyAnime?.status !== 'PLANNING' ?
-                                    `Chapters: ${MyAnime?.progress}` : ''
+                                MyAnime?.status === 'CURRENT' && MyAnime?.media?.status === 'RELEASING' && MyAnime?.media?.type === 'ANIME'? 
+                                 `Episodes: ${progress} ( Ep ${MyAnime?.media?.nextAiringEpisode?.episode} airing in ${timeStampsToRemainingTime(MyAnime?.media?.nextAiringEpisode?.timeUntilAiring)} )` : `Episodes: ${progress}/${MyAnime?.media.episodes}`
+                                 : ''
+                        }
+                        {
+                            MyAnime?.media?.type === 'MANGA' && MyAnime?.status !== 'PLANNING' ?
+                                MyAnime?.status === 'CURRENT' && MyAnime?.media?.status === 'RELEASING' && MyAnime?.media?.type === 'MANGA'?
+                                 `Chapters: ${progress}` : `Chapters: ${progress}/${MyAnime?.media.chapters}`
+                                 : ''
                         }
                     </p>
 
@@ -94,10 +89,13 @@ const MyMediaCard = (
 
             <button 
                 onClick={handleIncrement}
-                className='m-1 px-1 rounded-sm bg-[#7330e6]'>
+                className='m-1 px-1 rounded-sm bg-purple'>
                 +1
             </button>
-            <Toaster />
+            {
+                !isOpen && <Toaster position="top-center" containerStyle={{width : 'calc(88/100 * 600px)', height : '600px'}}/>
+
+            }
         </div>
     )
 }

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { searchAnimeResponse, MediaType } from "../types";
+import { searchMediaResponse, MediaType } from "../types";
 import MediaCard from "../components/MediaCard";
-
-
-import { searchAnime } from "../requests/index";
+import { searchMedia } from "../requests/index";
+import { useStore } from "@/app/store";
+import Update from "./Update";
 
 // shadcn
 import {
@@ -17,26 +17,23 @@ import {
 import {
   Triangle
 } from 'react-loader-spinner'
-import { useStore } from "@/app/store";
-import Update from "./Update";
+
 
 
 const SearchPage = () => {
 
   const [search, setSearch] = useState<string>("");
   const [mediaType, setMediaType] = useState<MediaType>("ANIME");
-  const [animeDataResponse, setAnimeDataResponse] = useState<searchAnimeResponse[]>([]);
+  const [mediaDataResponse, setMediaDataResponse] = useState<searchMediaResponse[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const {
-    animeId,
-  } = useStore();
+  const { animeId } = useStore();
 
   const fetchMediaData = async () => {
     try {
       setLoading(true);
-      const k = await searchAnime({ search, mediaType });
-      setAnimeDataResponse(k.data.Page.media);
+      const k = await searchMedia({ search, mediaType });
+      setMediaDataResponse(k.data.Page.media);
       setLoading(false);
     } catch (error) {
       throw new Error("Error in fetching data");
@@ -57,13 +54,13 @@ const SearchPage = () => {
   return (
       (animeId === 0)? (
         <div
-        className='bg-[#1a1a1a] w-full h-full relative'
+        className='bg-primary_gray w-full h-full relative'
       >
         <div className="p-6 flex gap-2">
           <input
             type="text"
             placeholder="Search..."
-            className='w-[300px] h-[40px] text-white bg-[#262626] p-2 rounded-sm outline-none border border-input'
+            className='w-[300px] h-[40px] text-white bg-secondary_gray p-2 rounded-sm outline-none border border-input'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -71,7 +68,7 @@ const SearchPage = () => {
             value={mediaType}
             onValueChange={(value) => setMediaType(value as MediaType)}
           >
-            <SelectTrigger className='p-2 w-[180px] text-white bg-[#262626] h-[40px] rounded-sm'>
+            <SelectTrigger className='p-2 w-[180px] text-white bg-secondary_gray h-[40px] rounded-sm'>
               <SelectValue placeholder="Select a type" />
             </SelectTrigger>
             <SelectContent>
@@ -91,11 +88,11 @@ const SearchPage = () => {
             </div>
           ) :
             (
-              <div className='m-6 mt-0 flex flex-col max-h-[500px] overflow-y-scroll scrollbar scrollbar-thumb-[#7330e6] scrollbar-w-3 gap-2'>
-                {animeDataResponse.map((animeData) => (
+              <div className='m-6 mt-0 flex flex-col max-h-[500px] overflow-y-scroll scrollbar scrollbar-thumb-purple scrollbar-w-3 gap-2'>
+                {mediaDataResponse.map((animeData) => (
                   <MediaCard
                     key={animeData.id}
-                    anime={animeData}
+                    media={animeData}
                   />
                 ))}
               </div>

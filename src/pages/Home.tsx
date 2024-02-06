@@ -16,13 +16,17 @@ const Home = () => {
 
   return (
     <main className='flex w-[600px] h-[600px]'>
-        <section className='bg-[#1a1a1a] w-[calc(88%)]'>
+        <section className='bg-[#1a1a1a] w-[calc(90%)]'>
             {
               currentTab === 'SEARCH'?
-              <SearchPage/> : currentTab === 'MYANIME'? <MyMedia MediaType="ANIME" /> : currentTab !== 'MYMANGA'? <Settings/> : <MyMedia MediaType="MANGA"/>
+              <SearchPage/> : 
+              currentTab === 'MYANIME'? 
+              <MyMedia MediaType="ANIME" /> : 
+              currentTab !== 'MYMANGA'? <Settings/> : 
+              <MyMedia MediaType="MANGA"/>
             }
         </section>
-        <section className='w-[calc(12%)]'>
+        <section className='w-[calc(10%)]'>
             <SideBar />
         </section>
     </main>
