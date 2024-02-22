@@ -1,27 +1,11 @@
-
-import Login from './pages/Login'
-
-import 
-  {useStore}
-from './app/store'
-import Home from './pages/Home'
+import Login from "./pages/Login";
+import { useStore } from "./app/store";
+import Home from "./pages/Home";
 
 function App() {
+    const { accessToken } = useStore();
 
-  const {
-    accessToken
-  } = useStore()
-  
-
-  return (
-    <div>
-      {
-        !accessToken?
-        <Login/> : 
-        <Home/>
-      }
-    </div>
-  )
+    return <div>{!accessToken ? <Login /> : <Home />}</div>;
 }
 
-export default App
+export default App;

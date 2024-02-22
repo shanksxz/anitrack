@@ -1,11 +1,9 @@
-const Genre = ({genre} : {
-    genre: string
-}) => {
-  return (
-    <span className='p-1 px-2 rounded-sm bg-purple text-white mr-2'>
-        {genre}
-    </span>
-  )
-}
+const Genre = ({ genre }: { genre: string }) => {
+    return (
+        <span className="p-1 px-2 rounded-sm bg-accent_bg text-primary_text mr-2">
+            {genre}
+        </span>
+    );
+};
 
-export default Genre
+export default Genre;

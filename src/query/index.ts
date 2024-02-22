@@ -7,8 +7,10 @@ const searchQuery = `
           romaji
           english
           native
+          userPreferred
         }
         type
+        chapters
         nextAiringEpisode {
           id
           timeUntilAiring
@@ -74,9 +76,21 @@ const updateQuery = `
           description
           bannerImage
           siteUrl
+
+          stats {
+            statusDistribution {
+              status
+              amount
+            }
+            scoreDistribution {
+              amount
+              score
+            }
+          } 
+
         }
     }
   }
 `;
 
-export { updateQuery, searchQuery}
+export { updateQuery, searchQuery };
