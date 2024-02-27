@@ -47,6 +47,7 @@ const Settings = () => {
     };
 
     const decoded = jwtDecode(accessToken as string);
+    console.log(decoded);
     const exp = convertExp(decoded.exp as number);
 
     const logoutHandler = () => {

@@ -57,6 +57,7 @@ const SearchPage = () => {
                 </div>
             ) : (
                 <div className="m-6 mt-0 flex flex-col max-h-[500px] overflow-y-scroll scrollbar scrollbar-thumb-purple scrollbar-w-3 gap-2">
+                    {/* overflow-y-scroll scrollbar scrollbar-thumb-purple scrollbar-w-3 */}
                     {mediaDataResponse?.Page.media.map(
                         (animeData: searchMediaResponse) => (
                             <MediaCard key={animeData.id} media={animeData} />

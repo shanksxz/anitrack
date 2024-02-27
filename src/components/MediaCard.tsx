@@ -3,6 +3,8 @@ import Genre from "./Genre";
 import { timeStampsToRemainingTime, formatTime } from "../utils";
 import { useStore } from "../app/store";
 
+import { Tooltip } from "react-tooltip";
+
 const getStatusText = (media: searchMediaResponse) => {
     if (media?.status === "RELEASING" && media?.type === "ANIME") {
         return (
@@ -56,8 +58,8 @@ const MediaCard = ({ media }: { media: searchMediaResponse }) => {
     return (
         <div
             onClick={() => setAnimeId(media.id)}
-            className="bg-secondary_bg flex rounded-sm hover:cursor-pointer"
-        >
+            className="bg-secondary_bg flex hover:cursor-pointer w-full h-[400px]"
+        >     
             <div className="relative w-[200px]">
                 <img
                     alt=""
@@ -65,7 +67,7 @@ const MediaCard = ({ media }: { media: searchMediaResponse }) => {
                     className="object-cover w-full h-full rounded-tl-sm rounded-bl-sm"
                 />
 
-                <div className="absolute bottom-0 w-full p-2 bg-black/60 text-dark_text font-bold order-2 border-green-500">
+                <div className="absolute bottom-0 w-full p-2 bg-black/50 text-dark_text font-bold">
                     <p className="text-[1rem]">
                         {media.title.english
                             ? media.title.english
@@ -104,6 +106,17 @@ const MediaCard = ({ media }: { media: searchMediaResponse }) => {
             </div>
         </div>
     );
+
+    // return (
+    //     <div className='w-[80px] h-[120px] p-1'>
+    //         <img 
+    //             id="img"
+    //             className="rounded-md w-full h-full object-cover"
+    //             src={media.coverImage.medium}
+    //             alt={media.title.english}
+    //         /> 
+    //     </div>
+    // )
 };
 
 export default MediaCard;
