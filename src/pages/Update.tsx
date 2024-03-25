@@ -31,7 +31,7 @@ const Update = () => {
         <>
             {isLoading ? (
                 <div className="max-h-[600px] flex justify-center items-center">
-                    <Triangle height={50} width={50} color="white" />
+                    <Triangle height={50} width={50} color="#02a9ff" />
                 </div>
             ) : (
                 <div className="w-full h-full relative z-10">

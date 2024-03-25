@@ -3,6 +3,7 @@ import { updateAnimeVariable } from "../types";
 import useGetUserMediaData from "@/hooks/useGetUserMediaData";
 import { Triangle } from "react-loader-spinner";
 import useUpdateUserMedia from "@/hooks/useUpdateUserMedia";
+import SelectComp from "./Select";
 
 type UpdateModalDetailsProps = {
     isOpen: boolean;
@@ -23,6 +24,8 @@ const UpdateModalDetails = ({ isOpen, setIsOpen, mediaId }: UpdateModalDetailsPr
         }
     };
 
+    // console.log("Loading: ", isLoading)/
+
     return (
         <div className="absolute top-0 z-10 left-0 w-full h-full bg-black/80">
             <Toaster
@@ -42,7 +45,7 @@ const UpdateModalDetails = ({ isOpen, setIsOpen, mediaId }: UpdateModalDetailsPr
                 `}>
                 {isLoading ? (
                     <div className="w-full h-full flex justify-center items-center">
-                        <Triangle height={50} width={50} color="white" />
+                        <Triangle height={50} width={50} color="#02a9ff" />
                     </div>
                 ) : (
                     <div className="relative z-10">
@@ -77,7 +80,48 @@ const UpdateModalDetails = ({ isOpen, setIsOpen, mediaId }: UpdateModalDetailsPr
                         >
                             <label className="update-label">
                                 <p>Status</p>
-                                <select
+                                <SelectComp 
+                                    value={tempData?.status as string}
+                                    onValueChange={(value) => {
+                                        if (value === "COMPLETED") {
+                                            setTempData((prev) => {
+                                                if (prev)
+                                                    return {
+                                                        ...prev,
+                                                        completedAt: {
+                                                            year: new Date().getFullYear(),
+                                                            month:
+                                                                new Date().getMonth() +
+                                                                1,
+                                                            day: new Date().getDate(),
+                                                        } as updateAnimeVariable["completedAt"],
+                                                        status: value as updateAnimeVariable["status"],
+                                                    };
+                                                return null;
+                                            });
+                                        } else {
+                                            setTempData((prev) => {
+                                                if (prev)
+                                                    return {
+                                                        ...prev,
+                                                        status: value as updateAnimeVariable["status"],
+                                                    };
+
+                                                return null;
+                                            });
+                                        }
+                                    }}
+                                    options={[
+                                        { value: "CURRENT", label: "CURRENT" },
+                                        { value: "COMPLETED", label: "COMPLETED" },
+                                        { value: "PLANNING", label: "PLANNING" },
+                                        { value: "DROPPED", label: "DROPPED" },
+                                        { value: "PAUSED", label: "PAUSED" },
+                                        { value: "REPEATING", label: "REPEATING" },
+                                    ]}
+                                    width="w-[100px]" 
+                                />
+                                {/* <select
                                     className="label-element"
                                     value={tempData?.status}
                                     onChange={(e) => {
@@ -117,7 +161,7 @@ const UpdateModalDetails = ({ isOpen, setIsOpen, mediaId }: UpdateModalDetailsPr
                                     <option value="DROPPED">DROPPED</option>
                                     <option value="PAUSED">PAUSED</option>
                                     <option value="REPEATING">REPEATING</option>
-                                </select>
+                                </select> */}
                             </label>
                             <label className="update-label">
                                 <p>Score</p>

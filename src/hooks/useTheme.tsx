@@ -1,13 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-type modeType = "light" | "dark" | "ani";
-type accent = "accent-blue" | "accent-green" | "accent-purple" | "accent-orange";
+type modeType = "light" | "dark";
+// type accent = "accent-blue" | "accent-green" | "accent-purple" | "accent-orange";
 
 type ThemeContextType = {
     mode: modeType;
-    accent: accent;
+    // accent: accent;
     setMode: (mode: modeType) => void;
-    setAccent: (accent: accent) => void;
+    // setAccent: (accent: accent) => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -25,55 +25,55 @@ const changeClass = (
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const [mode, setMode] = useState<modeType>(
-        (localStorage.getItem("theme") as modeType) || "ani"
+        (localStorage.getItem("theme") as modeType) || "dark"
     );
 
-    const [accent, setAccent] = useState<accent>(
-        (localStorage.getItem("accent") as accent) || "accent-purple"
-    );
+    // const [accent, setAccent] = useState<accent>(
+    //     (localStorage.getItem("accent") as accent) || "accent-purple"
+    // );
 
     const changeTheme = (mode: modeType) => {
-        const oldThemes = ["light", "dark", "ani"];
+        const oldThemes = ["light", "dark",];
         changeClass(document.documentElement, mode, oldThemes);
         // if (import.meta.env.DEV) {
-            localStorage.setItem("theme", mode);
+        //     localStorage.setItem("theme", mode);
         // } else {
-            // chrome.storage.local.set({ theme: mode });
+        //     chrome.storage.local.set({ theme: mode });
         // }
     };
 
 
-    const changeAccent = (accent: accent) => {
-        const oldAccents = ["accent-blue", "accent-green", "accent-purple", "accent-orange"];
-        changeClass(document.documentElement, accent, oldAccents);
+    // const changeAccent = (accent: accent) => {
+        // const oldAccents = ["accent-blue", "accent-green", "accent-purple", "accent-orange"];
+        // changeClass(document.documentElement, accent, oldAccents);
         // if (import.meta.env.DEV) {
-            localStorage.setItem("accent", accent);
+            // localStorage.setItem("accent", accent);
         // } else {
             // chrome.storage.local.set({ accent: accent });
         // }
-    };
+    // };
 
     useEffect(() => {
         changeTheme(mode);
     }, [mode]);
 
-    useEffect(() => {
-        changeAccent(accent as accent);
-    }, [accent]);
+    // useEffect(() => {
+    //     changeAccent(accent as accent);
+    // }, [accent]);
 
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme");
-        const savedAccent = localStorage.getItem("accent");
+        // const savedAccent = localStorage.getItem("accent");
         if (savedTheme) {
             changeTheme(savedTheme as modeType);
         }
-        if (savedAccent) {
-            changeAccent(savedAccent as accent);
-        }
+        // if (savedAccent) {
+        //     changeAccent(savedAccent as accent);
+        // }
     }, []);
 
     return (
-        <ThemeContext.Provider value={{ mode, setMode, accent, setAccent }}>
+        <ThemeContext.Provider value={{ mode, setMode}}>
             {children}
         </ThemeContext.Provider>
     );

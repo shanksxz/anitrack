@@ -3,7 +3,7 @@ import Genre from "./Genre";
 import { timeStampsToRemainingTime, formatTime } from "../utils";
 import { useStore } from "../app/store";
 
-import { Tooltip } from "react-tooltip";
+// import { Tooltip } from "react-tooltip";
 
 const getStatusText = (media: searchMediaResponse) => {
     if (media?.status === "RELEASING" && media?.type === "ANIME") {

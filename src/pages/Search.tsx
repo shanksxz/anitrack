@@ -37,7 +37,7 @@ const SearchPage = () => {
                 <input
                     type="text"
                     placeholder="Search..."
-                    className="w-[300px] text-[1.2rem] h-[40px] text-primary_text bg-secondary_bg p-2 rounded-sm outline-none border border-input"
+                    className="w-[300px] text-[1.2rem] h-[40px] text-primary_text bg-secondary_bg p-2 rounded-sm outline-none"
                     value={search}
                     onChange={handleSearch}
                 />

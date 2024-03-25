@@ -6,13 +6,13 @@ import AnimeService from "@/requests";
 import { useUserStore } from "@/app/store";
 
 // pre-defined components
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
+// import {
+//     Select,
+//     SelectContent,
+//     SelectItem,
+//     SelectTrigger,
+//     SelectValue,
+// } from "@/components/ui/select";
 
 import { Triangle } from "react-loader-spinner";
 import TooltipComp from "@/components/Tooltip";
@@ -21,6 +21,7 @@ import TooltipComp from "@/components/Tooltip";
 import MyMediaCard from "@/components/MyMediaCard";
 import { RefreshCw } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import SelectComp from "@/components/Select";
 
 const MyAnime = ({ MediaType }: { MediaType: "ANIME" | "MANGA" }) => {
     
@@ -33,6 +34,8 @@ const MyAnime = ({ MediaType }: { MediaType: "ANIME" | "MANGA" }) => {
         enabled: true,
         retry: 1,
     });
+    
+    console.log(loading, "loading");
 
     return (
         <section className="bg-primary_bg max-h-full relative p-6 text-primary_text">
@@ -42,7 +45,18 @@ const MyAnime = ({ MediaType }: { MediaType: "ANIME" | "MANGA" }) => {
 
             <div className="mt-2">
                 <div className="flex justify-between items-center">
-                    <Select
+                    <SelectComp
+                        value={status}
+                        width="w-[180px]"
+                        onValueChange={(value) => setStatus(value as mediaStatus)}
+                        options={[
+                            { value: "CURRENT", label: "Current" },
+                            { value: "COMPLETED", label: "Completed" },
+                            { value: "PLANNING", label: "Planning" },
+                            { value: "DROPPED", label: "Dropped" },
+                        ]}
+                    />
+                     {/* <Select
                         value={status}
                         onValueChange={(value) =>
                             setStatus(value as mediaStatus)
@@ -57,7 +71,7 @@ const MyAnime = ({ MediaType }: { MediaType: "ANIME" | "MANGA" }) => {
                             <SelectItem value="PLANNING">Planning</SelectItem>
                             <SelectItem value="DROPPED">Dropped</SelectItem>
                         </SelectContent>
-                    </Select>
+                    </Select> */}
                     <RefreshCw
                         id="refresh"
                         size={35}
@@ -68,7 +82,7 @@ const MyAnime = ({ MediaType }: { MediaType: "ANIME" | "MANGA" }) => {
                 </div>
                 {loading ? (
                     <div className="h-[450px] flex justify-center items-center">
-                        <Triangle color="black" height={50} width={50} />
+                        <Triangle color="#02a9ff" height={50} width={50} />
                     </div>
                 ) : (
                     <div className="mt-5 max-h-[450px] w-full flex flex-col gap-2 overflow-y-scroll scrollbar scrollbar-thumb-purple scrollbar-w-3">

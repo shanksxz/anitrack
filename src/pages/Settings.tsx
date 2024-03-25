@@ -5,31 +5,13 @@ import { convertExp } from "@/utils";
 import SelectComp from "@/components/Select";
 import { FaGithub } from "react-icons/fa";
 import { useState } from "react";
-import { useTheme } from "@/hooks/useTheme";
-
-const accents = [
-    { color: "#30e6e6", accentC: "accent-blue", id : 1 },
-    { color: "#30e64e", accentC: "accent-green", id : 2 },
-    { color: "#7330e6", accentC: "accent-purple", id : 3 },
-    { color: "#ef881a", accentC: "accent-orange", id : 4},
-];
-
-const theme = [
-    { color: "#0b1622", modeC: "ani", id: 1 },
-    { color: "white", modeC: "light", id: 2 },
-    // { color: "black", mode: "dark", id: 3 },
-];
-
-const AccentButton = ({ color, accent, onClick, className }: { color: string, accent: boolean, className?: string, onClick: () => void }) => (
-    <span style={{ backgroundColor: color }} className={`inline-block w-8 h-8 mr-2 rounded-md hover:cursor-pointer ${accent ? className : ""}`} onClick={onClick}></span>
-);
+import ThemeSwitch from "@/components/ThemeSwitch";
 
 
-type accentType = "accent-blue" | "accent-green" | "accent-purple" | "accent-orange";
+
 
 const Settings = () => {
 
-    const { accent, setAccent, mode, setMode } = useTheme();
     const { setCurrentTab } = currentUI();
     const { accessToken, setAccessToken } = useStore();
     const { userName } = useUserStore();
@@ -38,13 +20,8 @@ const Settings = () => {
         localStorage.getItem("defaultTab") || ""
     );
 
-    const changeAccent = (newAccent: accentType) => {
-        setAccent(newAccent);
-    };
 
-    const changeMode = (newMode: "light" | "dark" | "ani") => {
-        setMode(newMode);
-    };
+
 
     const decoded = jwtDecode(accessToken as string);
     console.log(decoded);
@@ -120,28 +97,18 @@ const Settings = () => {
                     <div>
                         <p>Primary Color</p>
                         <div className="mt-2">
-                            {theme.map(({ color, modeC, id }) => (
-                                <AccentButton
-                                    className={`border-2 ${id === 1 ? "border-white" : "border-black"}`}
-                                    key={id}
-                                    color={color}
-                                    accent={modeC === mode}
-                                    onClick={() => changeMode(modeC as "light" | "dark" | "ani")}
+                            {/* {theme.map(({ color, modeC, id }) => ( */}
+                                <ThemeSwitch
+                                    // className={`border-2 ${id === 1 ? "border-white" : "border-black"}`}
+                                    // key={id}
+                                    // color={color}
+                                    // accent={modeC === mode}
+                                    // onClick={() => changeMode(modeC as "light" | "dark" | "ani")}
                                 />
-                            ))}
+                            {/* ))} */}
                         </div>
                     </div>
                 </div>
-                <p className="block mb-2 mt-2">Accent Color</p>
-                {accents.map(({ color, accentC, id }) => (
-                    <AccentButton
-                        className="border-2 border-white"
-                        key={id}
-                        color={color}
-                        accent={accentC === accent}
-                        onClick={() => changeAccent(accentC as accentType)}
-                    />
-                ))}
             </div>
             <p className="mt-2 font-bold text-[1.5rem]">Links</p>
             <div className="mt-2 bg-secondary_bg p-2 rounded-sm flex items-center">
