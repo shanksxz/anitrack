@@ -7,19 +7,7 @@
     src: url("./assets/fonts/FreeSans.otf");
 }
 
-body {
-    width: 600px;
-    height: 600px;
-}
 
-#root {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
 
 @layer base {
     :root {
@@ -125,7 +113,9 @@ body {
         --color-text-primary : #f5f5f5;
         --color-text-dark : #ffffff;
     }
-}
+
+
+    }
 
 @layer base {
     * {
@@ -134,6 +124,20 @@ body {
 
     body {
         @apply bg-background text-foreground;
+    }
+
+    body {
+        width: 600px;
+        height: 600px;
+    }
+
+    #root {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 }
 

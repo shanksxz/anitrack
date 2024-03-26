@@ -1,10 +1,9 @@
 export const timeStampsToRemainingTime = (timeStamps: number): string => {
     const days = Math.floor(timeStamps / (60 * 60 * 24));
-    const hours = Math.floor((timeStamps % (60 * 60 * 24)) / (60 * 60));
-    if (days === 0) {
-        return `${hours} hours`;
-    }
-    return `${days} days ${hours} hours`;
+    // const hours = Math.floor((timeStamps % (60 * 60 * 24)) / (60 * 60));
+
+    // value should not be zero, if it is zero, than dont show it
+    return `${days ? `${days} days` : ""}`;
 };
 
 export const formatTime = (mins: number): string => {
