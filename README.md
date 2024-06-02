@@ -12,6 +12,13 @@
 - **Completion Date**: Update the complete date of an anime.
 - **Sync with AniList**: All updates made through the extension are automatically synced with your AniList account.
 
+## Screenshots
+<div align="center" style="display: flex; justify-content: space-evenly; flex-wrap: wrap; gap : 20px">
+     <img width="300" height="300" alt="login-ss" src="./screenshots/login.png">
+     <img width="300" height="300" alt="myanime-ss" src="./screenshots/myanime.png">
+     <img width="300" height="300" alt="settings-ss" src="./screenshots/settings.png">
+     <img width="300" height="300" alt="search-ss" src="./screenshots/search.png">
+</div>
 
 ## Installation
 
