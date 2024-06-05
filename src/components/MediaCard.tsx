@@ -1,4 +1,3 @@
-import { searchMediaResponse } from "../types";
 import Genre from "./Genre";
 import { timeStampsToRemainingTime, formatTime } from "../utils";
 import { useState } from "react";

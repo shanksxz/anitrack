@@ -11,6 +11,8 @@
             "@/*": ["./src/*"]
         },
 
+        "typeRoots": ["./node_modules/@types", "./src/types/types.d.ts"],
+
         /* Bundler mode */
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,

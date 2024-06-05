@@ -32,7 +32,7 @@ body {
     }
 }
 
-input::-webkit-outer-spin-button,
+/* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -40,7 +40,7 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
     -moz-appearance: textfield;
-}
+} */
 
 @layer base {
     :root {
@@ -125,7 +125,7 @@ input[type="number"] {
 }
 
 
-@layer utilities {
+/* @layer utilities {
     .update-label {
         @apply flex mt-2 text-base text-primary_text flex-col items-center;
     }
@@ -137,4 +137,4 @@ input[type="number"] {
     .clip-path {
         clip-path: polygon(0 0, 100% 0, 100% 100%);
     }
-}
+} */

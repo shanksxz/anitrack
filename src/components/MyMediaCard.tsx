@@ -1,4 +1,3 @@
-import { userMediaListResponse } from "@/types";
 import { useState } from "react";
 import UpdateModalDetails from "./updateModalDetails";
 import useUpdateUserMedia from "@/hooks/useUpdateUserMedia";

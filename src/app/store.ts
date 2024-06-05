@@ -1,7 +1,6 @@
 //TODO: integrate chrome api in production
-
 import { create } from "zustand";
-import { storeState } from "../types";
+
 
 const useStore = create<storeState>((set) => {
   const initialState = {
@@ -12,10 +11,6 @@ const useStore = create<storeState>((set) => {
   return initialState;
 });
 
-type uiState = {
-  currentTab: string;
-  setCurrentTab: (tab: string) => void;
-};
 
 const currentUI = create<uiState>((set) => {
   const defaultTab = localStorage.getItem("defaultTab") || "SETTINGS";
@@ -28,14 +23,6 @@ const currentUI = create<uiState>((set) => {
   return initialState;
 });
 
-
-type userDetail = {
-  user : {
-    id: number;
-    name: string;
-  }
-  setUser : (user: {id: number, name: string}) => void;
-}
 
 const useUserStore = create<userDetail>((set) => {
   const userDetail = JSON.parse(localStorage.getItem("userDetail") || "{}").Viewer || {};

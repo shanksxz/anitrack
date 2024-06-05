@@ -8,34 +8,13 @@ import { Button } from "./ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { useForm, SubmitHandler } from "react-hook-form"
 
-//TODO: Clean this mess
-type mediaStatus =
-    | "CURRENT"
-    | "PLANNING"
-    | "COMPLETED"
-    | "DROPPED"
-    | "PAUSED"
-    | "REPEATING";
 
-// have to change date type from object to string
-type updateAnimeVariable = {
-    mediaId: number;
-    status?: mediaStatus;
-    score?: number;
-    progress?: number;
-    repeat?: number;
+type foo = Omit<updateAnimeVariable, 'startedAt'| 'completedAt'> & {
     startedAt?: string;
     completedAt?: string;
-};
+}
 
-type UpdateModalDetailsProps = {
-    isOpen: boolean;
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    mediaId: number;
-};
-
-
-export default function UpdateModalDetails({ isOpen, setIsOpen, mediaId }: UpdateModalDetailsProps){
+export default function UpdateModalDetails({ isOpen, setIsOpen, mediaId }: ModalProps){
     
     const { animeData, tempData, isLoading } = useGetUserMediaData({ mediaId });
     const { mutateAsync, response, status, error } = useUpdateUserMedia();
@@ -43,7 +22,7 @@ export default function UpdateModalDetails({ isOpen, setIsOpen, mediaId }: Updat
     const {
         register,
         handleSubmit,
-    } = useForm<updateAnimeVariable>({
+    } = useForm<foo>({
         values: {
             mediaId: 21,
             status: tempData?.status || "CURRENT",
@@ -57,7 +36,7 @@ export default function UpdateModalDetails({ isOpen, setIsOpen, mediaId }: Updat
         }
     })
 
-    const onSubmit: SubmitHandler<updateAnimeVariable> = async (data) => {
+    const onSubmit: SubmitHandler<foo> = async (data) => {
         // convert date to object
         const startedAt = data.startedAt ? {
             year: Number(data.startedAt.split("-")[0]),
