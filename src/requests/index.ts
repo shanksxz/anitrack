@@ -1,14 +1,6 @@
 import { userMediaListQuery } from "@/query/medialist/index.ts";
 import { updateQuery, searchQuery } from "../query/index.ts";
 import { currentUserQuery } from "../query/viewer/index.ts";
-import {
-    searchAnimeVariable,
-    updateAnimeVariable,
-    MediaType,
-    userMediaListQueryResponse,
-    searhAnimeQueryResponse,
-    updateAnimeResponse
-} from "../types/index.ts";
 
 export default class AniList {
     private static readonly BASE_URL = "https://graphql.anilist.co";

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { mediaStatus } from "@/types";
 import AnimeService from "@/requests";
 import { useUserStore } from "@/app/store";
 import { Triangle } from "react-loader-spinner";

@@ -1,6 +1,5 @@
 import { useLayoutEffect, useState } from "react";
 import AnimeService from "../requests/index";
-import { ViewerQueryResponse } from "@/types";
 import { BookOpen, Search, Settings2, Tv } from "lucide-react";
 import { useUserStore } from "@/app/store";
 import { currentUI } from "@/app/store";

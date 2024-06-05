@@ -1,5 +1,4 @@
 import AnimeService from "@/requests";
-import {animeDataType, mediaStatus, updateAnimeResponse, updateAnimeVariable } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
 const formatUserMediaData =  (response : updateAnimeResponse): { tempData: updateAnimeVariable; animeData: animeDataType } => {

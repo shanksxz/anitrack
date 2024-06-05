@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { searchMediaResponse, MediaType } from "../types";
 import { useDebounce } from "@/hooks/useDebounce";
 import { Triangle } from "react-loader-spinner";
 import MediaCard from "../components/MediaCard";

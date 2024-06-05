@@ -1,5 +1,4 @@
 import AnimeService from "@/requests";
-import { updateAnimeVariable } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 
 export default function useUpdateUserMedia() {
