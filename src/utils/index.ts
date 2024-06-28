@@ -1,4 +1,4 @@
-import toast, { Toaster } from "react-hot-toast"
+import toast from "react-hot-toast"
 
 export const timeStampsToRemainingTime = (timeStamps: number): string => {
     const days = Math.floor(timeStamps / (60 * 60 * 24));
