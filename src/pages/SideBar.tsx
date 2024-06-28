@@ -1,35 +1,39 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect,useState } from "react";
 import AnimeService from "../requests/index";
 import { BookOpen, Search, Settings2, Tv } from "lucide-react";
 import { useUserStore } from "@/app/store";
 import { currentUI } from "@/app/store";
 import TooltipComp from "@/components/Tooltip";
-import Authenticated from "@/components/Authenticated";
-// import { useStore } from "@/app/store";
 import { useQuery } from "@tanstack/react-query";
 
 const SideBar = () => {
 
+    console.log("SiderBar Renders");
     const { setUser } = useUserStore();
     const { setCurrentTab } = currentUI();
-    // const { accessToken } = useStore();
-
     const [userData, setUserData] = useState<ViewerQueryResponse>(
         JSON.parse(localStorage.getItem("userDetail") || "{}")
     );
 
-    //TODO: fetching data on every render, instead use the local storage data
+    //? any better way?
+    const [firstRender, setFirstRender] = useState(false);
+
     const {
         data: userDataResponse,
     } = useQuery({
         queryKey: ["userDetails"],
         queryFn: () => AnimeService.userDetails(),
-        enabled: !userData?.Viewer?.id,
+        enabled : !firstRender
     })
 
-    useLayoutEffect(() => {
-        //? still needed?
-        if (userDataResponse) {
+    useEffect(() => {
+
+        if(!firstRender && !userData.Viewer) {
+            setFirstRender(true);
+        }
+
+        if (userDataResponse && !userData.Viewer) {
+            console.log("Insider")
             setUser({ id: userDataResponse?.Viewer.id, name: userDataResponse?.Viewer.name });
             setUserData(userDataResponse);
             localStorage.setItem("userDetail", JSON.stringify(userDataResponse));
@@ -39,15 +43,12 @@ const SideBar = () => {
 
     return (
         <section className="bg-purple border-l-2 border-l-black  h-full pt-3 flex flex-col items-center justify-between">
-            <Authenticated>
                 <div className="p-1 flex flex-col items-center">
                     <a href={userData?.Viewer?.siteUrl} target="_blank">
                         <img
                             alt="User Avatar"
                             src={userData?.Viewer?.avatar?.large}
-                            height={50}
-                            width={50}
-                            className="p-1 mb-[2rem] rounded-full border-2 border-white hover:bg-black hover:cursor-pointer"
+                            className="p-1 mb-[2rem] w-12 h-12 rounded-full border-2 border-white hover:bg-black hover:cursor-pointer"
                         />
                     </a>
                     <Search
@@ -85,7 +86,6 @@ const SideBar = () => {
                     onClick={() => setCurrentTab("SETTINGS")}
                 />
                 <TooltipComp content="Settings" anchorSelect="#settings" />
-            </Authenticated>
         </section>
     );
 };
