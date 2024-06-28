@@ -1,6 +1,7 @@
 import AnimeService from "@/requests";
 import { useMutation } from "@tanstack/react-query";
 
+
 export default function useUpdateUserMedia() {
     const {
         mutateAsync,
@@ -10,7 +11,6 @@ export default function useUpdateUserMedia() {
     } = useMutation({
         mutationKey: ["updateMedia"],
         mutationFn: (data: updateAnimeVariable) => AnimeService.updateMedia({ ...data }),
-        onSuccess: () => { }
     })
 
 

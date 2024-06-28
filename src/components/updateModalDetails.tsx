@@ -7,6 +7,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { useForm, SubmitHandler } from "react-hook-form"
+import { dismissToast, errorToast, loadingToast, successToast } from "@/utils";
 
 
 type foo = Omit<updateAnimeVariable, 'startedAt'| 'completedAt'> & {
@@ -51,14 +52,21 @@ export default function UpdateModalDetails({ isOpen, setIsOpen, mediaId }: Modal
         } : undefined
 
         try {
+            loadingToast();
             await mutateAsync({
                 ...data,
                 startedAt,
                 completedAt,
             })
+            dismissToast();
+            if(response?.SaveMediaListEntry == null) {
+                errorToast();
+            }
+            successToast();
             // print response
             console.log({ response, status, error })
         } catch (error) {
+            errorToast();
             console.log("error in updating data")
         }
     }
@@ -149,7 +157,8 @@ export default function UpdateModalDetails({ isOpen, setIsOpen, mediaId }: Modal
                             <Button type="submit">
                                 Update
                             </Button>
-                            <Button type="button" onClick={() => console.log("cancel")}>
+                            {/* //TODO: delete the data on anilist using this canel/del button */}
+                            <Button type="button" onClick={() => setIsOpen(!isOpen)}>
                                 Cancel
                             </Button>
                         </form>

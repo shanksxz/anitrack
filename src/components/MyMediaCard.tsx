@@ -1,6 +1,8 @@
 import { useState } from "react";
 import UpdateModalDetails from "./updateModalDetails";
 import useUpdateUserMedia from "@/hooks/useUpdateUserMedia";
+import { dismissToast, errorToast, loadingToast, successToast } from "@/utils";
+
 
 const MyMediaCard = ({ MyAnime }: { MyAnime: userMediaListResponse }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -8,16 +10,20 @@ const MyMediaCard = ({ MyAnime }: { MyAnime: userMediaListResponse }) => {
     const { mutateAsync, response, error, status } = useUpdateUserMedia();
 
     const handleIncrement = async () => {
+        console.log("Insider Increment")
         setProgress((prev) => prev + 1);
         try {
+            loadingToast();
             await mutateAsync({
                 mediaId: MyAnime.mediaId,
                 progress: progress + 1,
             });
-            // response
+            dismissToast();
+            successToast();
             console.log({ response, status, error });
         } catch (error) {
             setProgress((prev) => prev - 1);
+            errorToast();
             throw new Error("Error in updating data");
         }
     };
@@ -71,6 +77,8 @@ const MyMediaCard = ({ MyAnime }: { MyAnime: userMediaListResponse }) => {
                     +1
                 </button>
             </div>
+
+    
             {isOpen && (
                 <UpdateModalDetails
                     isOpen={isOpen}

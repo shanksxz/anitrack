@@ -5,7 +5,7 @@
     "type": "module",
     "author": {
         "name": "Somya Bhatt",
-        "username" : "@shanksxz",
+        "username": "@shanksxz",
         "email": "somyacu1@gmail.com",
         "url": "https://github.com/shanksxz"
     },
@@ -32,6 +32,7 @@
         "clsx": "^2.1.0",
         "jwt-decode": "^4.0.0",
         "lucide-react": "^0.322.0",
+        "next-themes": "^0.3.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.51.5",
