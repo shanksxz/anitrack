@@ -1,3 +1,5 @@
+import toast, { Toaster } from "react-hot-toast"
+
 export const timeStampsToRemainingTime = (timeStamps: number): string => {
     const days = Math.floor(timeStamps / (60 * 60 * 24));
     // const hours = Math.floor((timeStamps % (60 * 60 * 24)) / (60 * 60));
@@ -30,4 +32,12 @@ export function convertExp(exp: number) {
         ampm: ampm,
     };
 }
+
+// toasts
+export const errorToast = () => toast.error("Error in updating data");
+export const loadingToast = () => toast.loading("Updating...");
+export const dismissToast = () => toast.dismiss();
+export const successToast = () => toast.success("Updated Successfully");
+
+
 

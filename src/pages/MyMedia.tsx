@@ -9,6 +9,8 @@ import SelectComp from "@/components/Select";
 import { useQuery } from "@tanstack/react-query";
 
 const MyAnime = ({ MediaType }: { MediaType: "ANIME" | "MANGA" }) => {
+
+    console.log(`My${MediaType} Renders`);
     
     const { user } = useUserStore();
     const [status, setStatus] = useState<mediaStatus>("CURRENT");
@@ -16,7 +18,6 @@ const MyAnime = ({ MediaType }: { MediaType: "ANIME" | "MANGA" }) => {
     const {
         data : userAnimeData,
         isLoading: loading,
-        // refetch : fetchUserData,
     } = useQuery({
         queryKey : ["userMediaList", { user, status, MediaType }],
         queryFn: () => AnimeService.userMediaList(user.id, status, "UPDATED_TIME_DESC", MediaType),
