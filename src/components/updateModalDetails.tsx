@@ -25,7 +25,7 @@ export default function UpdateModalDetails({ isOpen, setIsOpen, mediaId }: Modal
         handleSubmit,
     } = useForm<foo>({
         values: {
-            mediaId: 21,
+            mediaId: mediaId,
             status: tempData?.status || "CURRENT",
             score: tempData?.score || 0,
             progress: tempData?.progress || 0,
@@ -38,6 +38,9 @@ export default function UpdateModalDetails({ isOpen, setIsOpen, mediaId }: Modal
     })
 
     const onSubmit: SubmitHandler<foo> = async (data) => {
+
+        
+
         // convert date to object
         const startedAt = data.startedAt ? {
             year: Number(data.startedAt.split("-")[0]),
@@ -117,28 +120,38 @@ export default function UpdateModalDetails({ isOpen, setIsOpen, mediaId }: Modal
                                 <Input
                                     type="number"
                                     step={0.1}
-                                    {...register("score")}
+                                    {...register("score", {
+                                        required : true,
+                                        min : 0,
+                                        max : 10,
+                                    })}
                                 />
                             </Label>
                             <Label>
                                 Episodes
                                 <Input
                                     type="number"
-                                    {...register("progress")}
+                                    {...register("progress", {
+                                        required : true
+                                    })}
                                 />
                             </Label>
                             <Label>
                                 Repeat
                                 <Input
                                     type="number"
-                                    {...register("repeat")}
+                                    {...register("repeat", {
+                                        required : true
+                                    })}
                                 />
                             </Label>
                             <Label>
                                 Started At
                                 <Input
                                     type="date"
-                                    {...register("startedAt")}
+                                    {...register("startedAt", {
+                                        required : true
+                                    })}
                                 />
                             </Label>
                             <Label>
@@ -146,6 +159,7 @@ export default function UpdateModalDetails({ isOpen, setIsOpen, mediaId }: Modal
                                 <Input
                                     type="date"
                                     {...register("completedAt", {
+                                        required : true,
                                         setValueAs: (v) => {
                                             // return new Date(v).toISOString()
                                             // return in object format like this { year: 2021, month: 10, day: 10 }
