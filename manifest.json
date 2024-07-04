@@ -2,10 +2,15 @@
     "name": "Anitrack",
     "author": "@shanksxz",
     "description": "Track your Anime/Manga progress, extension for AniList",
-    "version": "1.0.0.0",
+    "version": "2.0.0",
     "manifest_version": 3,
     "action": {
         "default_popup": "index.html"
+    },
+    "icons": {
+        "16" : "icon16.png",
+        "32" : "icon32.png",
+        "48" : "icon48.png"
     }
 }
 
