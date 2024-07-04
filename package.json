@@ -1,7 +1,7 @@
 {
     "name": "anitrack",
     "description": "Anitrack is an extension that helps you keep track of your favorite anime shows and movies on AniList.",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "type": "module",
     "author": {
         "name": "Somya Bhatt",
