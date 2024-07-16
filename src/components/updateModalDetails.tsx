@@ -159,7 +159,6 @@ export default function UpdateModalDetails({ isOpen, setIsOpen, mediaId }: Modal
                                 <Input
                                     type="date"
                                     {...register("completedAt", {
-                                        required : true,
                                         setValueAs: (v) => {
                                             // return new Date(v).toISOString()
                                             // return in object format like this { year: 2021, month: 10, day: 10 }
