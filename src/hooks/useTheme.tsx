@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import browser from "webextension-polyfill";
 
-type modeType = "light" | "dark";
+type ModeType = "light" | "dark";
 
 type ThemeContextType = {
-    mode: modeType;
-    setMode: (mode: modeType) => void;
+    mode: ModeType;
+    setMode: (mode: ModeType) => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -21,24 +22,32 @@ const changeClass = (
 };
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+    const [mode, setMode] = useState<ModeType>("dark");
 
-    const [mode, setMode] = useState<modeType>(
-        (localStorage.getItem("theme") as modeType) || "dark"
-    );
-
-    const changeTheme = (mode: modeType) => {
-        const oldThemes = ["light", "dark",];
-        changeClass(document.documentElement, mode, oldThemes);
-        localStorage.setItem("theme", mode);
+    const changeTheme = (newMode: ModeType) => {
+        const oldThemes = ["light", "dark"];
+        changeClass(document.documentElement, newMode, oldThemes);
+        browser.storage.local.set({ theme: newMode });
     };
 
+    useEffect(() => {
+        const loadTheme = async () => {
+            const result = await browser.storage.local.get("theme");
+            const savedTheme = result.theme as ModeType | undefined;
+            if (savedTheme) {
+                setMode(savedTheme);
+            }
+        };
+
+        loadTheme();
+    }, []);
 
     useEffect(() => {
         changeTheme(mode);
     }, [mode]);
 
     return (
-        <ThemeContext.Provider value={{ mode, setMode}}>
+        <ThemeContext.Provider value={{ mode, setMode }}>
             {children}
         </ThemeContext.Provider>
     );

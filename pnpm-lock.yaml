@@ -99,6 +99,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.17
         version: 18.2.22
+      '@types/webextension-polyfill':
+        specifier: ^0.12.1
+        version: 0.12.1
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.14.0
         version: 6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.3))(eslint@8.57.0)(typescript@5.4.3)
@@ -141,6 +144,9 @@ importers:
       vite:
         specifier: ^5.0.8
         version: 5.2.6(@types/node@20.11.30)
+      webextension-polyfill:
+        specifier: ^0.12.0
+        version: 0.12.0
 
 packages:
 
@@ -934,6 +940,9 @@ packages:
 
   '@types/stylis@4.2.0':
     resolution: {integrity: sha512-n4sx2bqL0mW1tvDf/loQ+aMX7GQD3lc3fkCMC55VFNDu/vBOabO+LTIeXKM14xK0ppk5TUGcWRjiSpIlUpghKw==}
+
+  '@types/webextension-polyfill@0.12.1':
+    resolution: {integrity: sha512-xPTFWwQ8BxPevPF2IKsf4hpZNss4LxaOLZXypQH4E63BDLmcwX/RMGdI4tB4VO4Nb6xDBH3F/p4gz4wvof1o9w==}
 
   '@typescript-eslint/eslint-plugin@6.21.0':
     resolution: {integrity: sha512-oy9+hTPCUFpngkEZUSzbf9MxI65wbKFoQYsgPdILTfbUldp5ovUuphZVe4i30emU9M/kP+T64Di0mxl7dSw3MA==}
@@ -2156,6 +2165,9 @@ packages:
       terser:
         optional: true
 
+  webextension-polyfill@0.12.0:
+    resolution: {integrity: sha512-97TBmpoWJEE+3nFBQ4VocyCdLKfw54rFaJ6EVQYLBCXqCIpLSZkwGgASpv4oPt9gdKCJ80RJlcmNzNn008Ag6Q==}
+
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
@@ -2973,6 +2985,8 @@ snapshots:
   '@types/semver@7.5.8': {}
 
   '@types/stylis@4.2.0': {}
+
+  '@types/webextension-polyfill@0.12.1': {}
 
   '@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.3))(eslint@8.57.0)(typescript@5.4.3)':
     dependencies:
@@ -4194,6 +4208,8 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.11.30
       fsevents: 2.3.3
+
+  webextension-polyfill@0.12.0: {}
 
   which@2.0.2:
     dependencies:

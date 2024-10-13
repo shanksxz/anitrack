@@ -1,7 +1,8 @@
 import { useStore } from "@/app/store";
-import { Dialog, DialogContent, DialogTrigger } from "@radix-ui/react-dialog";
+import { Dialog, DialogContent } from "@radix-ui/react-dialog";
 import { jwtDecode } from "jwt-decode";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
+import browser from "webextension-polyfill";
 
 const isValidToken = (token: string) => {
   try {
@@ -19,15 +20,18 @@ const Login = ({ onClose }: { onClose: () => void }) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
     if (!isValidToken(inputAccessToken)) {
       setErrors("Invalid Token");
       return;
     }
-
-    localStorage.setItem("accessToken", inputAccessToken);
-    setAccessToken(inputAccessToken);
-    onClose(); // Close the dialog after successful login
+    try {
+      await browser.storage.local.set({ accessToken: inputAccessToken });
+      setAccessToken(inputAccessToken);
+      onClose(); 
+    } catch (error) {
+      console.error("Error saving token:", error);
+      setErrors("Failed to save token");
+    }
   };
 
   return (
@@ -64,31 +68,40 @@ const Login = ({ onClose }: { onClose: () => void }) => {
 };
 
 const Auth = ({ children }: { children: React.ReactNode }) => {
-  const { accessToken } = useStore();
+  const { accessToken, setAccessToken } = useStore();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  console.log("Inside Auth Function");
+  useEffect(() => {
+    const loadToken = async () => {
+      try {
+        const result = await browser.storage.local.get("accessToken");
+        if (result.accessToken) {
+          setAccessToken(result.accessToken as string);
+        }
+      } catch (error) {
+        console.error("Error loading token:", error);
+      }
+    };
+
+    loadToken();
+  }, [setAccessToken]);
 
   if (!accessToken) {
     return (
       <section className="flex w-full h-full">
         <div className="p-5 bg-primary_bg relative w-[90%] h-full flex flex-col items-start justify-center">
-
-        {!isDialogOpen && (
-            //!FIX: DialogTrigger isn't working idk why? 
+          {!isDialogOpen && (
             <>
-            <h1 className="text-4xl text-primary_text font-bold">You are not logged in</h1>
-            <p className="my-2 text-primary_text">Please login to access the settings</p>
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-              <DialogTrigger className="px-2 py-1 bg-[#02a9ff] text-primary_text text-[1.2rem] font-bold rounded-sm">
+              <h1 className="text-4xl text-primary_text font-bold">You are not logged in</h1>
+              <p className="my-2 text-primary_text">Please login to access the settings</p>
+              <button
+                onClick={() => setIsDialogOpen(true)}
+                className="px-2 py-1 bg-[#02a9ff] text-primary_text text-[1.2rem] font-bold rounded-sm"
+              >
                 Login
-              </DialogTrigger>
-              <DialogContent>
-                <Login onClose={() => setIsDialogOpen(false)} />
-              </DialogContent>
-            </Dialog>
-          </>
-        )}
+              </button>
+            </>
+          )}
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogContent>
               <Login onClose={() => setIsDialogOpen(false)} />
@@ -99,7 +112,6 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
       </section>
     );
   }
-
   return <>{children}</>;
 };
 

@@ -1,6 +1,7 @@
 import { userMediaListQuery } from "@/query/medialist/index.ts";
 import { updateQuery, searchQuery } from "../query/index.ts";
 import { currentUserQuery } from "../query/viewer/index.ts";
+import browser from "webextension-polyfill";
 
 export default class AniList {
     private static readonly BASE_URL = "https://graphql.anilist.co";
@@ -9,12 +10,13 @@ export default class AniList {
         Accept: "application/json",
     };
 
-    private static getAccessToken() {
-            return localStorage.getItem("accessToken");
+    private static async getAccessToken() {
+        const res = await browser.storage.local.get("accessToken");
+        return res.accessToken || null;
     }
 
     private static async fetchGraphQL(query: string, variables?: Record<string, any>) {
-        const accessToken = this.getAccessToken();
+        const accessToken = await this.getAccessToken();
         const headers = accessToken ? { ...this.HEADERS, Authorization: `Bearer ${accessToken}` } : this.HEADERS;
 
         const response = await fetch(this.BASE_URL, {
