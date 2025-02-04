@@ -20,6 +20,7 @@ const SideBar = () => {
     } = useQuery({
         queryKey: ["userDetails"],
         queryFn: () => AnimeService.userDetails(),
+        enabled: !userData,
     });
 
     useEffect(() => {

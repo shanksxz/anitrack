@@ -7,7 +7,8 @@ export default class AniList {
     private static readonly BASE_URL = "https://graphql.anilist.co";
     private static readonly HEADERS = {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        "Accept": "application/json",
+        "Access-Control-Allow-Origin": "*"
     };
 
     private static async getAccessToken() {
